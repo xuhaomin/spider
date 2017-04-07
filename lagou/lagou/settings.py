@@ -40,14 +40,14 @@ CONCURRENT_REQUESTS_PER_DOMAIN = 2
 
 # Override the default request headers:
 DEFAULT_REQUEST_HEADERS = {
-   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-   'Accept-Language': 'en-US,en;q=0.5',
-   'Accept-Encoding': 'gzip, deflate, br',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'en-US,en;q=0.5',
+    'Accept-Encoding': 'gzip, deflate, br',
 }
 
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
+# SPIDER_MIDDLEWARES = {
 #    'lagou.middlewares.LagouSpiderMiddleware': 543,
 #}
 
@@ -55,18 +55,19 @@ DEFAULT_REQUEST_HEADERS = {
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'lagou.UAMiddleware.UAMiddleware': 543,
+    'lagou.CookieMiddleware.CookieMiddleware': 666,
 }
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
-#EXTENSIONS = {
+# EXTENSIONS = {
 #    'scrapy.extensions.telnet.TelnetConsole': None,
 #}
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'lagou.local_mysql_pipeline.LagouPipeline': 300,
+    'lagou.mysql_pipeline.LagouPipeline': 400,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -89,3 +90,19 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+#----------------------database----------------------------
+DB_TYPE = 'mysql'
+DB_OWNER = 'local'
+DB_HOST = 'localhost'
+DB_PORT = 3306
+DB_USER = 'root'
+DB_NAME = 'spider'
+DB_PW = 'xhm900119'
+DB_CHARSET = 'utf8mb4'
+DB_TABLE = 'lagou'
+
+
+#---------------------redis--------------------------------
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"

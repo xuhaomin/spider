@@ -6,7 +6,7 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import pymysql
 
-from .dbsettings import *
+from .settings import *
 
 
 class LagouPipeline(object):
@@ -38,6 +38,7 @@ class LagouPipeline(object):
         except Exception as e:
             self.conn.rollback()
             print(e)
+        return item
 
     def close_spider(self, spider):
         self.conn.close()
