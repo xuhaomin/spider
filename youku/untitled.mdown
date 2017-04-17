@@ -1,0 +1,5 @@
+### youku rank
+- url http://index.api.youku.com/getData?num=700008&orderPro=vv&startindex=1&endindex=10&channelId=96
+- num 700008 normal
+- num 700009 set
+- channelId category
