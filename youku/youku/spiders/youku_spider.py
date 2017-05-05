@@ -43,10 +43,10 @@ class YoukuSpiderSpider(scrapy.Spider):
     def start_requests(self):
         req_list = [scrapy.Request(
             url=self.rank_url.format(
-                v_type=catagory['type'], channel=catagory['channel']),
-            meta={'category': catagory['name']},
+                v_type=category['type'], channel=category['channel']),
+            meta={'category': category['name']},
             callback=self.parse_rank,
-        ) for catagory in self.rank_table]
+        ) for category in self.rank_table]
         req_list = []
         req_list.append(scrapy.Request(url='http://www.youku.com/',
                                        callback=self.parse_fontpage))

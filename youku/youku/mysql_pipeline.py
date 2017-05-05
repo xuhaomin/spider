@@ -40,6 +40,7 @@ class youkuPipeline(object):
             self.conn.commit()
         except Exception as e:
             self.conn.rollback()
+            print(e)
         return item
 
     def close_spider(self, spider):
