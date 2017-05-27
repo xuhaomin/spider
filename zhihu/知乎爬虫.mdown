@@ -1,0 +1,25 @@
+### 知乎爬虫
+#### 1.知乎日报
+- url: http://daily.zhihu.com/
+- 验证: 只对UA有要求
+- 条目: 30条
+- 内容: 标题,链接,图片
+
+#### 2.知乎发现
+- 发现分为 热门 和 推荐
+- 热门
+- url: GET  https://www.zhihu.com/node/ExploreAnswerListV2?params=''
+- params: {'offset':***,'type':'**'} dumps后的json字典
+- 规则:热门有两种,day和month,每次访问则返回五条,offset是开始的index,最多199条
+- 验证:只要提供合适的UA就可访问
+- 内容:提供全文
+- 推荐
+- url: POST  https://www.zhihu.com/node/ExploreRecommendListV2
+- 参数: {'method': 'next', 'params': '{"offset": 40, "limit": 20}'} 这里的offset和limit都无限制,可能就是直接封装数据库查询接口
+- 返回数据: {'r':*,'msg':[]} r返回值为0,暂时不知是什么意思,msg是字符串型的答案内容,msg中提供了答案的全文
+
+#### 3.爬虫抓取信息
+- 日报只提供链接,加上日报内容一般较多,所以直接保存链接就好了,不过这样在网页上就不宜将其放在第一位
+- 热门和推荐都给出了全文信息,可以都保存,初载只载入标题,摘要,提供查看全文link,点击显示全文
+- 热门有200条,推荐更是不限制,所以提供 换一批 按钮,更新内容,
+

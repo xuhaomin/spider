@@ -8,10 +8,12 @@
 from scrapy import signals
 
 
-class TaobaoSpiderMiddleware(object):
+
+class ZhihuSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.
+
 
     @classmethod
     def from_crawler(cls, crawler):
@@ -54,3 +56,4 @@ class TaobaoSpiderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
