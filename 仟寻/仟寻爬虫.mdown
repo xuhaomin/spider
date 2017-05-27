@@ -1,0 +1,9 @@
+## 仟寻爬虫
+- fontpage:https://www.moseeker.com/
+- search-url:https://www.moseeker.com/job/search?keyword={kw}&city={city}&candidate_source=%E5%85%A8%E9%83%A8&employment_type=%E5%85%A8%E9%83%A8
+- dbapi:http://www.moseeker.com/job/search?keyword={kw}&city={city}&candidate_source={cs}&employment_type={et}&count={pageNo}&size={pageSize}&_={timestramp}
+### method
+- 使用 selenium 模拟访问searchurl，得到cookie
+- 记录cookie中_xsrf字段，加入headers的'X-Csrftoken'中
+- 使用cookie及修改后的头通过网站dbapi获得数据库数据
+- 注:网站后台api并没限制当次请求能得到的数据条数，也就是说，一次性可以直接把数据库内容都爬过来。
