@@ -1,0 +1,45 @@
+## 优酷 
+> 修订于2017-05-30
+#### 视频详情链接
+- url : https://ups.youku.com/ups/get.json
+- params : 
+    {
+        'vid': vid,
+        'ccode': '0401',
+        'client_ip': '192.168.1.1',
+        'client_ts': time.time() / 1000,
+        'utid': utid,
+    }
+- vid : 视频vid
+- utid ： 
+        https://log.mmstat.com/eg.js 中 Etag 的值
+
+- ccode ： 分辨视频来源土豆还是优酷
+- cookies ： '__ysuid' ； 'xreferrer',
+- __ysuid :
+       '%d%s' % (int(time.time()), ''.join([random.choice(string.ascii_letters) for i in range(3)]))
+
+#### 视频信息
+- 格式：json
+- 关键字：cost；data；e
+
+##### data
+- preview：略缩图信息
+- controller：播放控制
+- stream：视频流信息
+- uploader：上传信息
+- ups：ups信息
+- video：视频详细
+- user，network：本地信息
+> 对于电视剧，综艺节目，有相关视频videos字段
+
+##### 流信息
+- 格式：不同格式视频信息组成的数组
+- stream_type:视频格式
+- segs:分段视频信息
+- m3u8_url:m3u8流链接
+
+#### idea
+- 大部分stream都是flv，原来的MP4格式文件已经找不到了
+- flv，m3u8因为跨域问题，很难在网页上播放了，下一个坑就是找合适的播放器，不过好歹大部分还提供一个mp4流
+- 之前写api因为没写文档，所以修改代码后再要修改api实在是麻烦，下次一定要写好api文档 
